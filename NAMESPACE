@@ -2,6 +2,7 @@
 
 export(conditional_bernoulli)
 export(multivariate_probit)
+export(zero_inflated_poisson)
 import(tensorflow)
 importFrom(R6,R6Class)
 importFrom(greta,.internals)
