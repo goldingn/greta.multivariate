@@ -12,7 +12,22 @@
 #' @param theta, scalar for the zero-inflation parameter
 #' @param lambda, scalar the expected value of the poisson distribution
 #' @param dim a scalar giving the number of rows in the resulting greta array
+#'
+#'
+#'
+#'@example
+#' \dontrun{
+#'
+#' y <- rpois(100, 2)
+#' y[rbinom(100, 1, 0.3)] <- 0
+#' y <- as_data(y)
 
+#' theta <- beta(3, 3)
+#' lbd <- normal(0, 1, truncation = c(0, Inf))
+#' distribution(y) <- zero_inflated_poisson(theta, lbd)
+#'
+#'}
+#'
 #'
 #' @importFrom R6 R6Class
 #' @export
@@ -39,7 +54,7 @@ zero_inflated_poisson_distribution <- R6Class(
       lambda <- parameters$lambda
       log_prob <- function(x) {
 
-        tf$log(theta * tf$cast(tf$nn$relu(fl(1) - x), tf$float32) + (fl(1) - theta) * tf$pow(lambda, x) * tf$exp(-lambda) / tf$exp(tf$lgamma(x + fl(1))))
+        tf$log(theta * tf$nn$relu(fl(1) - x) + (fl(1) - theta) * tf$pow(lambda, x) * tf$exp(-lambda) / tf$exp(tf$lgamma(x + fl(1))))
       }
 
       list(log_prob = log_prob, cdf = NULL, log_cdf = NULL)
