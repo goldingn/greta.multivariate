@@ -15,27 +15,11 @@ cache:
   directories:
     - $HOME/.cache/pip
 
-addons:
-  apt:
-    sources:
-      ubuntu-toolchain-r-test
-    packages:
-      - libmagick++-dev
-      - wget
-      - libatlas3gf-base
-      - libatlas-dev
-      - python-joblib
-      - python-dev
-      - libv8-dev
-
 before_install:
-  - pip install --upgrade pip
   - pip install --user numpy
-  - pip install --user tensorflow
+  - pip install --user scipy
+  - pip install --user 'tensorflow==1.14'
+  - pip install --user 'tensorflow-probability==0.7.0'
 
 after_success:
-  - Rscript -e "covr::codecov()"
-
-email:
-  on_success: change
-  on_failure: change
+  - Rscript -e 'covr::codecov()'
