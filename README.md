@@ -5,6 +5,8 @@
 greta.multivariate will provide functions and distributions for multivariate modelling (modelling multivariate response variables) in greta.
 It is a work in progress, watch this space. 
 
+Some mods
+
 [![Build
 Status](https://travis-ci.org/lionel68/greta.multivariate.svg?branch=master)](https://travis-ci.org/lionel68/greta.multivariate)
 [![Codecov test
