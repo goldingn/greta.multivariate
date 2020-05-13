@@ -3,7 +3,6 @@
 \docType{package}
 \name{greta.multivariate}
 \alias{greta.multivariate}
-\alias{greta.multivariate-package}
 \title{Multivariate Modelling with greta}
 \description{
 A greta extension providing distributions and functions for
