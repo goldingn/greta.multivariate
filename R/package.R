@@ -14,5 +14,8 @@ distrib <- greta::.internals$nodes$constructors$distrib
 as.greta_array <- greta::.internals$greta_arrays$as.greta_array
 tf_iprobit <- greta::.internals$tensors$tf_iprobit
 fl <- greta::.internals$utils$misc$fl
+get_seed <- greta::.internals$utils$misc$get_seed
 tf_as_float <- greta::.internals$tensors$tf_as_float
 tf_rowsums <- greta:::tf_rowsums
+
+tfp <- reticulate::import("tensorflow_probability", delay_load = FALSE)

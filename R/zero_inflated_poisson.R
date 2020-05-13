@@ -37,7 +37,7 @@ zero_inflated_poisson <- function (theta, lambda, dim = 1)
 
 zero_inflated_poisson_distribution <- R6Class(
   "zero_inflated_poisson_distribution",
-  inherit = .internals$nodes$node_classes$distribution_node,
+  inherit = greta::.internals$nodes$node_classes$distribution_node,
   public = list(
     initialize = function(theta, lambda, dim) {
       theta <- as.greta_array(theta)
@@ -57,7 +57,21 @@ zero_inflated_poisson_distribution <- R6Class(
         tf$log(theta * tf$nn$relu(fl(1) - x) + (fl(1) - theta) * tf$pow(lambda, x) * tf$exp(-lambda) / tf$exp(tf$lgamma(x + fl(1))))
       }
 
-      list(log_prob = log_prob, cdf = NULL, log_cdf = NULL)
+      sample <- function(seed) {
+
+        binom <- tfp$distributions$Binomial(total_count = 1,
+                                         probs = theta)
+
+        pois <- tfp$distributions$Poisson(rate = lambda)
+
+        zi <- binom$sample(seed = seed)
+        lbd <- pois$sample(seed = seed)
+
+        (fl(1) - zi) * lbd
+
+      }
+
+      list(log_prob = log_prob, sample = sample, cdf = NULL, log_cdf = NULL)
     },
 
     tf_cdf_function = NULL,

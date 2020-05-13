@@ -80,6 +80,13 @@ dzipois <- function(x , theta , lambda , log=FALSE ) {
      }
 }
 
+# random generation of zipois
+rzipois <- function(n, theta, lambda){
+  zi <- rbinom(n, 1, theta)
+  y <- (1 - zi) * rpois(n, lambda)
+  return(y)
+}
+
 # get_node
 get_node <- function(x){
   attr(x, "node")
