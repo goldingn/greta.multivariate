@@ -54,7 +54,7 @@ zero_inflated_poisson_distribution <- R6Class(
       lambda <- parameters$lambda
       log_prob <- function(x) {
 
-        tf$.math.log(theta * tf$nn$relu(fl(1) - x) + (fl(1) - theta) * tf$pow(lambda, x) * tf$exp(-lambda) / tf$exp(tf$.math.lgamma(x + fl(1))))
+        tf$math.log(theta * tf$nn$relu(fl(1) - x) + (fl(1) - theta) * tf$pow(lambda, x) * tf$exp(-lambda) / tf$exp(tf$math.lgamma(x + fl(1))))
       }
 
       sample <- function(seed) {
