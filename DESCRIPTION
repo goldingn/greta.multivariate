@@ -9,6 +9,7 @@ Description: A greta extension providing distributions and functions for
 License: Apache License 2.0
 Imports:
   tensorflow,
+  abind,
   reticulate,
   R6
 Depends:
